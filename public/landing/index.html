@@ -120,16 +120,17 @@
       z-index: 1;
       pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.35;
+      opacity: 0.10;
     }
 
     /* ─── Glassmorphism card ─── */
     .glass-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 1.25rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
     }
 
     /* ─── Nav ─── */
@@ -142,7 +143,7 @@
       align-items: center;
       justify-content: space-between;
       background: var(--nav-bg);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       transition: background 0.4s;
     }
@@ -233,6 +234,7 @@
       font-weight: 900;
       line-height: 1.05;
       letter-spacing: -0.03em;
+      text-shadow: 0 2px 24px rgba(2,132,199,0.12);
     }
     .hero-headline .accent {
       background: linear-gradient(135deg, #0284c7 0%, #67e8f9 60%, #0284c7 100%);
@@ -244,6 +246,7 @@
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -0.025em;
+      text-shadow: 0 2px 20px rgba(2,132,199,0.10);
     }
     .section-headline .accent {
       background: linear-gradient(135deg, #0284c7, #67e8f9);
@@ -321,13 +324,13 @@
     /* ─── Cursor glow ─── */
     #cursor-glow {
       position: fixed;
-      width: 380px; height: 380px;
+      width: 280px; height: 280px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--cursor-col) 0%, transparent 70%);
       pointer-events: none;
       z-index: 2;
       transform: translate(-50%, -50%);
-      transition: left 0.12s ease-out, top 0.12s ease-out;
+      will-change: left, top;
     }
 
     /* ─── Section radial gradient backdrop ─── */
@@ -394,6 +397,192 @@
       .cta-visual { display: none; }
     }
 
+    /* ═══════════════════════════════════
+       MOBILE RESPONSIVE STYLES
+    ═══════════════════════════════════ */
+
+    /* ── Small tablets & large phones ── */
+    @media (max-width: 768px) {
+      /* Nav: compact padding, hide text links, keep CTA + toggle */
+      #nav {
+        padding: 0.75rem 1rem;
+      }
+      #nav .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+      .nav-cta {
+        padding: 0.45rem 1rem;
+        font-size: 0.8rem !important;
+      }
+      #theme-toggle {
+        margin-left: 0.65rem;
+        width: 1.85rem;
+        height: 1.85rem;
+      }
+
+      /* Hero section */
+      .hero-headline {
+        font-size: clamp(1.8rem, 8vw, 3rem) !important;
+      }
+      .section-headline {
+        font-size: clamp(1.5rem, 6vw, 2.4rem) !important;
+      }
+      .stat-val {
+        font-size: 1.6rem;
+      }
+
+      /* Hero stat cards: vertical stack */
+      #hero-stat-cards {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .hero-stat-card {
+        min-width: unset;
+        width: 100%;
+      }
+
+      /* Section panels: reduce min-height */
+      .section-panel {
+        min-height: auto !important;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      #section-report .max-w-xl,
+      #section-sats .max-w-xl {
+        max-width: 100%;
+      }
+
+      /* Spacers: much shorter on mobile */
+      .st-spacer {
+        height: 8vh !important;
+      }
+
+      /* Report section: left-align on mobile */
+      .st-report-inner {
+        justify-content: flex-start !important;
+      }
+
+      /* Feature items: tighter */
+      .feature-item {
+        padding: 0.75rem 1rem;
+        gap: 0.75rem;
+      }
+      .feature-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        font-size: 0.85rem;
+      }
+
+      /* CTA section */
+      .cta-grid {
+        gap: 2rem;
+      }
+
+      /* Scroll hint */
+      .scroll-hint {
+        bottom: 1.5rem;
+      }
+
+      /* 3D canvas: make semi-transparent, reduce presence on mobile */
+      #three-canvas {
+        opacity: 0.35;
+      }
+
+      /* Cursor glow: hide on touch devices */
+      #cursor-glow {
+        display: none !important;
+      }
+
+      /* Buttons: full width on mobile */
+      .flex.flex-wrap.gap-4 {
+        flex-direction: column;
+        width: 100%;
+      }
+      .flex.flex-wrap.gap-4 > * {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* Footer */
+      footer {
+        padding: 1.5rem 1rem;
+      }
+
+      /* Holo badge: wrap text */
+      .holo-badge {
+        font-size: 0.72rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      /* Section label */
+      .section-label {
+        font-size: 0.68rem;
+        padding: 0.3rem 0.75rem;
+      }
+
+      /* Triage live panel (if visible) */
+      .triage-live-panel {
+        font-size: 0.85rem;
+      }
+      .tlp-entry {
+        padding: 0.45rem 0.8rem;
+        gap: 0.5rem;
+      }
+      .tlp-id { width: 3.5rem; font-size: 0.7rem; }
+      .tlp-badge { font-size: 0.6rem; padding: 0.12rem 0.4rem; }
+      .tlp-status { font-size: 0.65rem; }
+      .tlp-age { font-size: 0.6rem; }
+    }
+
+    /* ── Very small phones (≤ 480px) ── */
+    @media (max-width: 480px) {
+      #nav {
+        padding: 0.6rem 0.75rem;
+      }
+      #nav .logo-text {
+        font-size: 1.05rem;
+      }
+      .hero-headline {
+        font-size: clamp(1.5rem, 9vw, 2.2rem) !important;
+      }
+      .section-headline {
+        font-size: clamp(1.3rem, 7vw, 1.9rem) !important;
+      }
+      .stat-val {
+        font-size: 1.3rem;
+      }
+      .section-panel {
+        min-height: auto !important;
+      }
+      /* Stack CTA buttons */
+      .cta-grid > div:first-child > div[style] {
+        flex-direction: column !important;
+      }
+      .cta-grid > div:first-child > div[style] > a {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* Reduce blob filter intensity on low-end devices */
+      .st-blob {
+        filter: blur(60px);
+      }
+    }
+
+    /* ── Disable heavy effects on mobile/touch ── */
+    @media (hover: none) and (pointer: coarse) {
+      #cursor-glow { display: none !important; }
+      .hero-stat-card::before { display: none; }
+      .cta-stat-card::before { display: none; }
+      /* Disable 3D tilt on touch */
+      .hero-stat-card { transform: none !important; }
+      /* Reduce particle visibility on low-end */
+      #three-canvas { opacity: 0.3; }
+    }
+
     /* ─── Stripe-style animations ─── */
     /* Feature-item hover lift */
     .feature-item {
@@ -440,8 +629,6 @@
       border-radius: 1rem;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       min-width: 130px;
       overflow: hidden;
       cursor: default;
@@ -554,8 +741,8 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 1.25rem;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       overflow: hidden;
       box-shadow: 0 4px 40px rgba(0,0,0,0.25);
     }
@@ -666,7 +853,10 @@
 
 <!-- ─── NAV ─── -->
 <nav id="nav">
-  <div class="logo-text">Smart Triage</div>
+  <div style="display:flex;align-items:center;gap:0.55rem;">
+    <img src="Logo.png" alt="Smart Triage" style="width:30px;height:30px;object-fit:contain;" />
+    <span class="logo-text">Smart Triage</span>
+  </div>
   <div class="nav-links" style="display:flex;align-items:center;">
     <a href="#section-hero">Home</a>
     <a href="#section-sats">SATS Audit</a>
@@ -762,7 +952,7 @@
   </section>
 
   <!-- Spacer so mascot has time to settle -->
-  <div style="height:30vh;"></div>
+  <div class="st-spacer" style="height:30vh;"></div>
 
   <!-- ══════════════ SECTION 2 — SATS AUDIT ══════════════ -->
   <section id="section-sats" class="section-panel" style="min-height:100vh;">
@@ -814,12 +1004,12 @@
   </section>
 
   <!-- Spacer -->
-  <div style="height:20vh;"></div>
+  <div class="st-spacer" style="height:20vh;"></div>
 
   <!-- ══════════════ SECTION 3 — MIDNIGHT REPORT ══════════════ -->
   <section id="section-report" class="section-panel" style="min-height:100vh;">
     <div class="absolute inset-0 section-glow-left pointer-events-none"></div>
-    <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-20 flex justify-end">
+    <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-20 flex justify-end st-report-inner">
       <!-- Text on RIGHT, mascot moves LEFT in 3D -->
       <div class="max-w-xl reveal" id="report-content">
         <div class="section-label">
@@ -868,7 +1058,7 @@
   </section>
 
   <!-- Spacer -->
-  <div style="height:20vh;"></div>
+  <div class="st-spacer" style="height:20vh;"></div>
 
   <!-- ══════════════ CTA ══════════════ -->
   <section class="section-panel" style="min-height:70vh;">
@@ -938,6 +1128,10 @@
 
   <!-- ══════════════ FOOTER ══════════════ -->
   <footer>
+    <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:0.75rem;">
+      <img src="Logo.png" alt="Smart Triage" style="width:22px;height:22px;object-fit:contain;opacity:0.7;" />
+      <span style="font-weight:700;color:var(--fg-muted);font-size:0.9rem;">Smart Triage</span>
+    </div>
     <p>© 2026 <span>Smart Triage</span>. Built for Rwanda. Inspired by every nurse who works past midnight.</p>
   </footer>
 
@@ -955,6 +1149,9 @@
   ───────────────────────────────────────────── */
   gsap.registerPlugin(ScrollTrigger);
 
+  // Detect mobile/touch device
+  const IS_MOBILE = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
+
   /* ─────────────────────────────────────────────
      1. THREE.JS SCENE SETUP
   ───────────────────────────────────────────── */
@@ -962,14 +1159,10 @@
   const W = () => window.innerWidth;
   const H = () => window.innerHeight;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !IS_MOBILE, alpha: false, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_MOBILE ? 1 : 1.5));
   renderer.setSize(W(), H());
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
 
   const scene  = new THREE.Scene();
   scene.background = new THREE.Color(0x020b14);
@@ -985,20 +1178,11 @@
 
   const keyLight = new THREE.DirectionalLight(0x0284c7, 2.8);
   keyLight.position.set(3, 5, 4);
-  keyLight.castShadow = true;
   scene.add(keyLight);
 
   const fillLight = new THREE.PointLight(0x0369a1, 3.5, 14);
   fillLight.position.set(-3, 2, 3);
   scene.add(fillLight);
-
-  const rimLight = new THREE.PointLight(0x0c4a6e, 2.2, 10);
-  rimLight.position.set(0, -3, -4);
-  scene.add(rimLight);
-
-  const topLight = new THREE.PointLight(0x67e8f9, 1.6, 8);
-  topLight.position.set(0, 6, 1);
-  scene.add(topLight);
 
   /* ─────────────────────────────────────────────
      3. MATERIAL FACTORY
@@ -1286,7 +1470,7 @@
 
   const radarRings = radarDefs.map((d, idx) => {
     const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(d.r, d.tube, 16, 128),
+      new THREE.TorusGeometry(d.r, d.tube, 10, 48),
       M.ring(d.color, 1.4)
     );
     ring.rotation.set(d.tiltX, d.tiltY, 0);
@@ -1311,7 +1495,7 @@
   // Wireframe decoration rings (faint)
   [2.45, 3.1].forEach((r, i) => {
     const wr = new THREE.Mesh(
-      new THREE.TorusGeometry(r, 0.008, 8, 100),
+      new THREE.TorusGeometry(r, 0.008, 6, 36),
       M.wireRing(i === 0 ? 0x0284c7 : 0x0369a1)
     );
     wr.rotation.x = [0.6, -0.3][i];
@@ -1321,8 +1505,8 @@
   /* ──────────────────────────────────────────
      8. PARTICLE SYSTEM — Mouse reactive
   ────────────────────────────────────────── */
-  const PARTICLE_COUNT = 3200;
-  const SPREAD = 30;
+  const PARTICLE_COUNT = IS_MOBILE ? 300 : 1000;
+  const SPREAD = IS_MOBILE ? 22 : 28;
 
   const particlePositions = new Float32Array(PARTICLE_COUNT * 3);
   const particleVelocities = new Float32Array(PARTICLE_COUNT * 3);
@@ -1440,17 +1624,21 @@
   ────────────────────────────────────────── */
   const mouse = { x: 0, y: 0, nx: 0, ny: 0 }; // normalised -1..1
   const cursorGlow = document.getElementById('cursor-glow');
+  let _mouseRAF = 0;
 
   window.addEventListener('mousemove', e => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
     mouse.nx = (e.clientX / W()) * 2 - 1;
     mouse.ny = -(e.clientY / H()) * 2 + 1;
-    if (cursorGlow) {
-      cursorGlow.style.left = e.clientX + 'px';
-      cursorGlow.style.top  = e.clientY + 'px';
+    if (cursorGlow && !_mouseRAF) {
+      _mouseRAF = requestAnimationFrame(() => {
+        cursorGlow.style.left = mouse.x + 'px';
+        cursorGlow.style.top  = mouse.y + 'px';
+        _mouseRAF = 0;
+      });
     }
-  });
+  }, { passive: true });
 
   /* ──────────────────────────────────────────
      10. GSAP SCROLL TRIGGERS
@@ -1543,8 +1731,8 @@
     ease: 'power3.out', delay: 0.45,
   });
 
-  // 2. Animated ambient gradient blobs (Stripe-style)
-  [
+  // 2. Animated ambient gradient blobs (Stripe-style) — skip on mobile
+  if (!IS_MOBILE) [
     { sel: '#section-hero',   color: 'rgba(2,132,199,0.18)', w: 560, h: 380, l: '8%',  t: '18%', dur: 18, dx: 65, dy: 45  },
     { sel: '#section-hero',   color: 'rgba(12,74,110,0.22)',   w: 400, h: 420, l: '72%', t: '62%', dur: 22, dx:-55, dy: 38  },
     { sel: '#section-sats',   color: 'rgba(6,182,212,0.13)', w: 480, h: 360, l: '78%', t: '28%', dur: 16, dx:-60, dy: 55  },
@@ -1659,25 +1847,33 @@
     }, 920 + i * 170);
   });
 
-  // 11. Hero stat cards: spotlight + 3-D tilt + border breathe + sparkline re-draw on re-hover
-  document.querySelectorAll('.hero-stat-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
-      card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
-      const tx = ((e.clientY - r.top)  / r.height - 0.5) * -13;
-      const ty = ((e.clientX - r.left) / r.width  - 0.5) *  13;
-      card.style.transform = `perspective(480px) rotateX(${tx}deg) rotateY(${ty}deg) scale(1.045) translateY(-3px)`;
+  // 11. Hero stat cards: spotlight + subtle tilt + border breathe + sparkline re-draw (desktop only)
+  if (!IS_MOBILE) {
+    document.querySelectorAll('.hero-stat-card').forEach(card => {
+      let _tiltRAF = 0;
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+        if (!_tiltRAF) {
+          _tiltRAF = requestAnimationFrame(() => {
+            const rr = card.getBoundingClientRect();
+            const tx = ((e.clientY - rr.top)  / rr.height - 0.5) * -8;
+            const ty = ((e.clientX - rr.left) / rr.width  - 0.5) *  8;
+            card.style.transform = `perspective(600px) rotateX(${tx}deg) rotateY(${ty}deg) scale(1.03) translateY(-2px)`;
+            _tiltRAF = 0;
+          });
+        }
+      });
+      card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('is-hovered');
+        card.style.transform = '';
+        const line = card.querySelector('.hsc-line');
+        if (line) { line.classList.remove('drawn'); void line.offsetWidth; line.classList.add('drawn'); }
+      });
     });
-    card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
-    card.addEventListener('mouseleave', () => {
-      card.classList.remove('is-hovered');
-      card.style.transform = '';
-      // Replay sparkline animation
-      const line = card.querySelector('.hsc-line');
-      if (line) { line.classList.remove('drawn'); void line.offsetWidth; line.classList.add('drawn'); }
-    });
-  });
+  }
 
   // 12. is-hovered class management for feature-items and cta-stat-cards
   [...document.querySelectorAll('.feature-item'), ...document.querySelectorAll('.cta-stat-card')].forEach(card => {
@@ -1837,28 +2033,26 @@
     });
   });
 
-  // 17. Mild parallax depth on feature cards
-  gsap.utils.toArray('.feature-item').forEach(item => {
-    gsap.to(item, { yPercent: -4, ease: 'none',
-      scrollTrigger: { trigger: item, start: 'top bottom', end: 'bottom top', scrub: 1.2 },
-    });
-  });
+  // 17. (Parallax removed for performance)
 
-  // 18. Magnetic pull on primary CTA buttons
+  // 18. CTA buttons: iframe navigation + magnetic pull (desktop only)
   document.querySelectorAll('a[href="/dashboard"]').forEach(btn => {
     btn.classList.add('has-shimmer', 'has-ripple');
-    btn.addEventListener('mousemove', e => {
-      const r = btn.getBoundingClientRect();
-      gsap.to(btn, { x: (e.clientX - (r.left + r.width/2)) * 0.28, y: (e.clientY - (r.top + r.height/2)) * 0.28, duration: 0.28, ease: 'power2.out' });
-    });
-    btn.addEventListener('mouseleave', () => gsap.to(btn, { x: 0, y: 0, duration: 0.55, ease: 'elastic.out(1,0.4)' }) );
+    if (!IS_MOBILE) {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        gsap.to(btn, { x: (e.clientX - (r.left + r.width/2)) * 0.28, y: (e.clientY - (r.top + r.height/2)) * 0.28, duration: 0.28, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', () => gsap.to(btn, { x: 0, y: 0, duration: 0.55, ease: 'elastic.out(1,0.4)' }) );
+    }
     btn.addEventListener('click', e => {
-      const r = btn.getBoundingClientRect(), size = Math.max(r.width, r.height);
-      const w = document.createElement('span');
-      w.className = 'ripple-wave';
-      w.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px;`;
-      btn.appendChild(w);
-      w.addEventListener('animationend', () => w.remove());
+      e.preventDefault();
+      // Notify parent React app
+      if (window.parent !== window) {
+        window.parent.postMessage('navigate-dashboard', '*');
+      } else {
+        window.location.href = '/dashboard';
+      }
     });
   });
   let clock = new THREE.Clock();
@@ -1874,28 +2068,26 @@
     const delta = clock.getDelta();
     t += delta;
 
-    // ── Frame-rate-independent lerp ──
-    const LF = 1 - Math.pow(0.004, delta);
-    cur.posX = lerp(cur.posX, mascot.posX, LF * 3.0);
-    cur.posY = lerp(cur.posY, mascot.posY, LF * 3.0);
-    cur.rotY = lerp(cur.rotY, mascot.rotY, LF * 3.0);
-    cur.rotX = lerp(cur.rotX, mascot.rotX, LF * 3.0);
+    // ── Frame-rate-independent lerp (stiff, no wobble) ──
+    const LF = 1 - Math.pow(0.001, delta);
+    cur.posX = lerp(cur.posX, mascot.posX, LF * 2.0);
+    cur.posY = lerp(cur.posY, mascot.posY, LF * 2.0);
+    cur.rotY = lerp(cur.rotY, mascot.rotY, LF * 2.0);
+    cur.rotX = lerp(cur.rotX, mascot.rotX, LF * 2.0);
 
-    // ── Idle breathing ──
-    const breath  = Math.sin(t * 0.55) * 0.10;
-    const breathS = 1 + Math.sin(t * 1.1) * 0.014;
+    // ── Idle breathing (subtle) ──
+    const breath  = Math.sin(t * 0.45) * 0.035;
+    const breathS = 1 + Math.sin(t * 0.9) * 0.008;
 
-    // ── Logo root: position + scroll rotation + mouse parallax tilt ──
+    // ── Logo root: position + scroll rotation + very subtle mouse parallax ──
     robotRoot.position.set(
-      cur.posX + mouse.nx * 0.12,
-      cur.posY + breath + mouse.ny * 0.08,
+      cur.posX + mouse.nx * 0.03,
+      cur.posY + breath + mouse.ny * 0.02,
       0
     );
-    // Sprite: allow Y rotation for scroll storytelling but keep X tilt very subtle
-    // so the flat texture doesn't look skewed.
-    robotRoot.rotation.y = cur.rotY + mouse.nx * 0.08;
-    robotRoot.rotation.x = cur.rotX * 0.3 + mouse.ny * 0.04;
-    robotRoot.rotation.z = Math.sin(t * 0.12) * 0.015;
+    robotRoot.rotation.y = cur.rotY + mouse.nx * 0.02;
+    robotRoot.rotation.x = cur.rotX * 0.2 + mouse.ny * 0.015;
+    robotRoot.rotation.z = 0;
     robotRoot.scale.setScalar(breathS);
 
     // ── Sprite glow pulse ──
@@ -1948,14 +2140,14 @@
     posAttr.set(livePos);
     posAttr.needsUpdate = true;
 
-    // Global rotate + mouse parallax
-    particles.rotation.y += delta * 0.038 + mouse.nx * 0.00025;
-    particles.rotation.x  = Math.sin(t * 0.05) * 0.07 + mouse.ny * 0.012;
-    particles.rotation.z  = window.scrollY * 0.000032;
+    // Global rotate + subtle mouse parallax
+    particles.rotation.y += delta * 0.02 + mouse.nx * 0.0001;
+    particles.rotation.x  = Math.sin(t * 0.04) * 0.04 + mouse.ny * 0.005;
+    particles.rotation.z  = 0;
 
-    // ── Camera subtle drift ──
-    camera.position.x = lerp(camera.position.x, mouse.nx * 0.4, 0.035);
-    camera.position.y = lerp(camera.position.y, 0.4 + mouse.ny * 0.25, 0.035);
+    // ── Camera subtle drift (reduced) ──
+    camera.position.x = lerp(camera.position.x, mouse.nx * 0.15, 0.02);
+    camera.position.y = lerp(camera.position.y, 0.4 + mouse.ny * 0.10, 0.02);
     camera.lookAt(0, 0.2, 0);
 
     renderer.render(scene, camera);
@@ -1969,7 +2161,7 @@
     camera.aspect = W() / H();
     camera.updateProjectionMatrix();
     renderer.setSize(W(), H());
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   });
 
   /* ──────────────────────────────────────────
